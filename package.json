@@ -1,0 +1,31 @@
+{
+  "name": "ayra-erp-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "dev:landing": "npm --prefix ./apps/landing_panel run dev",
+    "dev:master": "npm --prefix ./apps/master_admin run dev",
+    "dev:super": "npm --prefix ./apps/super_admin run dev",
+    "dev:user": "npm --prefix ./apps/user_panel run dev"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.18.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
