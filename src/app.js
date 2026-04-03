@@ -46,6 +46,10 @@ const allowedOrigins = Array.from(
       "http://localhost:5173",
       "http://localhost:5174",
       "http://localhost:3000",
+      "https://superadmin.myayra.in",
+      "https://user.myayra.in",
+      "https://master.myayra.in",
+      "https://myayra.in",
     ]
       .flatMap((value) => (value ? value.split(",") : []))
       .map((origin) => origin.trim())
