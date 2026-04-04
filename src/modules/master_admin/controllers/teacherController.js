@@ -75,37 +75,15 @@ export const deleteTeacher = async (req, res, next) => {
 // ── @GET /api/teachers/stats ────────────────────────────────
 export const getTeacherStats = async (req, res, next) => {
   try {
-    const [total, active, onLeave, byDept, byDesignation, onLeaveByDesignation] = await Promise.all([
+    const [total, active, onLeave, byDept, byDesignation] = await Promise.all([
       Teacher.countDocuments(),
       Teacher.countDocuments({ status: 'Active' }),
       Teacher.countDocuments({ status: 'On Leave' }),
       Teacher.aggregate([{ $group: { _id: '$department', count: { $sum: 1 } } }]),
       Teacher.aggregate([{ $group: { _id: '$designation', count: { $sum: 1 } } }]),
-      Teacher.aggregate([
-        { $match: { status: 'On Leave' } },
-        { $group: { _id: '$designation', count: { $sum: 1 } } },
-      ]),
     ]);
 
-    const leaveCountMap = Object.fromEntries(
-      onLeaveByDesignation.map((entry) => [entry._id, entry.count])
-    );
-
-    const designationBreakdown = byDesignation.map((entry) => ({
-      designation: entry._id,
-      total: entry.count,
-      onLeave: leaveCountMap[entry._id] || 0,
-      active: entry.count - (leaveCountMap[entry._id] || 0),
-    }));
-
-    return sendSuccess(res, {
-      total,
-      active,
-      onLeave,
-      byDepartment: byDept,
-      byDesignation,
-      designationBreakdown,
-    });
+    return sendSuccess(res, { total, active, onLeave, byDepartment: byDept, byDesignation });
   } catch (error) {
     next(error);
   }

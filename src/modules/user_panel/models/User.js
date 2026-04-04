@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const userSchema = new mongoose.Schema(
+import getUserPanelModel from "../config/connection.js";
+
+const userSchema = new Schema(
   {
     tenantSlug: {
       type: String,
@@ -34,7 +36,7 @@ const userSchema = new mongoose.Schema(
 
 userSchema.index({ tenantSlug: 1, role: 1, username: 1 }, { unique: true });
 
-export default mongoose.model("UserPanelUser", userSchema, "user_panel_users");
+export default getUserPanelModel("UserPanelUser", userSchema, "users");
 
 
 

@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const advisorySchema = new mongoose.Schema(
+import getUserPanelModel from "../config/connection.js";
+
+const advisorySchema = new Schema(
   {
     tenantSlug: { type: String, required: true, index: true },
     title: { type: String, required: true },
@@ -12,4 +14,4 @@ const advisorySchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export default mongoose.model("Advisory", advisorySchema);
+export default getUserPanelModel("Advisory", advisorySchema);

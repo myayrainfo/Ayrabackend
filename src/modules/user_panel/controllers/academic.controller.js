@@ -1,8 +1,10 @@
 import AcademicApproval from "../models/AcademicApproval.js";
 import AcademicRecord from "../models/AcademicRecord.js";
+import AttendanceRecord from "../models/AttendanceRecord.js";
 import CurriculumPlan from "../models/CurriculumPlan.js";
 import LeaveRequest from "../models/LeaveRequest.js";
 import Student from "../models/Student.js";
+import TeacherAssignment from "../models/TeacherAssignment.js";
 import Timetable from "../models/Timetable.js";
 import User from "../models/User.js";
 import { createDocument, deleteDocument, listDocuments, updateDocument } from "../utils/crudHandlers.js";
@@ -33,6 +35,11 @@ export const updateAcademicStudent = updateDocument(Student);
 export const deleteAcademicStudent = deleteDocument(Student);
 
 export const listAcademicLeaveRequests = listDocuments(LeaveRequest);
+export const listTeacherAssignments = listDocuments(TeacherAssignment);
+export const createTeacherAssignment = createDocument(TeacherAssignment);
+export const updateTeacherAssignment = updateDocument(TeacherAssignment);
+export const deleteTeacherAssignment = deleteDocument(TeacherAssignment);
+export const listAcademicAttendance = listDocuments(AttendanceRecord);
 
 export async function listTeachers(req, res, next) {
   try {

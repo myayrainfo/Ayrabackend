@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const timetableSchema = new mongoose.Schema(
+import getUserPanelModel from "../config/connection.js";
+
+const timetableSchema = new Schema(
   {
     tenantSlug: { type: String, required: true, index: true },
     department: { type: String, required: true },
@@ -15,4 +17,4 @@ const timetableSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export default mongoose.model("Timetable", timetableSchema);
+export default getUserPanelModel("Timetable", timetableSchema);

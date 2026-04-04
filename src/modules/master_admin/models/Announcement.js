@@ -35,7 +35,7 @@ const announcementSchema = new mongoose.Schema(
     publishedAt: { type: Date },
     expiresAt: { type: Date },
     attachments: [{ type: String }],
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'MasterAdmin', required: true },
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin', required: true },
     tenantId: { type: mongoose.Schema.Types.ObjectId, ref: 'Tenant', default: null },
   },
   { timestamps: true }
@@ -44,11 +44,5 @@ const announcementSchema = new mongoose.Schema(
 announcementSchema.index({ status: 1, publishedAt: -1 });
 announcementSchema.index({ title: 'text', content: 'text' });
 
-const Announcement = mongoose.model('MasterAnnouncement', announcementSchema, 'master_announcements');
+const Announcement = mongoose.model('Announcement', announcementSchema);
 export default Announcement;
-
-
-
-
-
-

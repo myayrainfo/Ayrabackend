@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
 import Admin from '../models/Admin.js';
 import Student from '../models/Student.js';
 import Teacher from '../models/Teacher.js';
@@ -8,15 +7,15 @@ import Course from '../models/Course.js';
 import Fee from '../models/Fee.js';
 import Announcement from '../models/Announcement.js';
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/AYRAERP';
+const MONGO_URI = process.env.MONGODB_URI || process.env.MONGO_URI || 'mongodb://localhost:27017/erp_admin';
 
 // ─── Seed Data ─────────────────────────────────────────────
 
 const adminData = {
   name: process.env.SEED_ADMIN_NAME || 'Super Admin',
-  username: process.env.SEED_ADMIN_USERNAME || 'admin',
-  email: process.env.SEED_ADMIN_EMAIL || 'admin@university.edu',
-  password: process.env.SEED_ADMIN_PASSWORD || 'admin@123',
+  username: process.env.SEED_ADMIN_USERNAME || process.env.SUPERADMIN_USERNAME || 'superadmin',
+  email: process.env.SEED_ADMIN_EMAIL || process.env.SUPERADMIN_EMAIL || 'superadmin@erp-system.com',
+  password: process.env.SEED_ADMIN_PASSWORD || process.env.SUPERADMIN_PASSWORD || 'Admin@1234',
   role: 'superadmin',
   department: 'Administration',
   isActive: true,

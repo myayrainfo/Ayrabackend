@@ -1,7 +1,7 @@
 import express from 'express';
 import {
   getAdmins, createAdmin, updateAdmin,
-  deleteAdmin, toggleAdminStatus,
+  deleteAdmin, toggleAdminStatus, getAdminStats,
 } from '../controllers/adminController.js';
 import { protect, authorize } from '../middleware/auth.js';
 import { body } from 'express-validator';
@@ -11,6 +11,7 @@ const router = express.Router();
 
 // All admin management routes require authentication
 router.use(protect);
+router.use(authorize('superadmin'));
 
 const createAdminValidation = [
   body('name').trim().notEmpty().withMessage('Name is required'),
@@ -25,6 +26,8 @@ const createAdminValidation = [
 router.route('/')
   .get(getAdmins)
   .post(createAdminValidation, validate, createAdmin);
+
+router.get('/stats', getAdminStats);
 
 router.route('/:id')
   .put(updateAdmin)

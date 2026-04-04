@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import ensureMasterAdmin from "./modules/master_admin/utils/ensureMasterAdmin.js";
 
 export default async function connectDatabase() {
   const mongoUri =
@@ -10,4 +11,5 @@ export default async function connectDatabase() {
   await mongoose.connect(mongoUri, {
     serverSelectionTimeoutMS: 5000,
   });
+  await ensureMasterAdmin();
 }

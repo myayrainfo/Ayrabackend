@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const curriculumPlanSchema = new mongoose.Schema(
+import getUserPanelModel from "../config/connection.js";
+
+const curriculumPlanSchema = new Schema(
   {
     tenantSlug: { type: String, required: true, index: true },
     program: { type: String, required: true },
@@ -17,4 +19,4 @@ const curriculumPlanSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export default mongoose.model("CurriculumPlan", curriculumPlanSchema);
+export default getUserPanelModel("CurriculumPlan", curriculumPlanSchema);

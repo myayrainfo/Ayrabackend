@@ -42,7 +42,12 @@ const adminSchema = new mongoose.Schema(
     department: { type: String, default: 'Administration' },
     isActive: { type: Boolean, default: true },
     lastLogin: { type: Date, default: null },
+    lastActivityAt: { type: Date, default: Date.now },
     refreshToken: { type: String, select: false },
+    isDeleted: { type: Boolean, default: false, index: true },
+    deletedAt: { type: Date, default: null },
+    deletedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin', default: null },
+    deletionReason: { type: String, default: '' },
 
     // For future multi-tenancy — will hold tenant/university ObjectId
     tenantId: { type: mongoose.Schema.Types.ObjectId, ref: 'Tenant', default: null },
@@ -71,8 +76,7 @@ adminSchema.methods.toJSON = function () {
   return obj;
 };
 
-const Admin = mongoose.model('MasterAdmin', adminSchema, 'master_admins');
+adminSchema.index({ name: 'text', username: 'text', email: 'text', department: 'text' });
+
+const Admin = mongoose.model('Admin', adminSchema);
 export default Admin;
-
-
-

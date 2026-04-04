@@ -1,5 +1,9 @@
 import Student from "../models/Student.js";
+import AttendanceRecord from "../models/AttendanceRecord.js";
 import LeaveRequest from "../models/LeaveRequest.js";
+import StudentProgress from "../models/StudentProgress.js";
+import SupportContact from "../models/SupportContact.js";
+import TeacherAlert from "../models/TeacherAlert.js";
 import { createDocument, deleteDocument, listDocuments, updateDocument } from "../utils/crudHandlers.js";
 
 export const listStudents = listDocuments(Student);
@@ -8,6 +12,10 @@ export const updateStudent = updateDocument(Student);
 export const deleteStudent = deleteDocument(Student);
 
 export const listLeaveRequests = listDocuments(LeaveRequest);
+export const listStudentProgress = listDocuments(StudentProgress);
+export const listStudentAttendance = listDocuments(AttendanceRecord);
+export const listStudentAlerts = listDocuments(TeacherAlert);
+export const listSupportContacts = listDocuments(SupportContact);
 
 export async function createLeaveRequest(req, res, next) {
   try {

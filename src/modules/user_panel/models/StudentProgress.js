@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const studentProgressSchema = new mongoose.Schema(
+import getUserPanelModel from "../config/connection.js";
+
+const studentProgressSchema = new Schema(
   {
     tenantSlug: { type: String, required: true, index: true },
     studentId: { type: String, required: true },
@@ -14,4 +16,4 @@ const studentProgressSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export default mongoose.model("StudentProgress", studentProgressSchema);
+export default getUserPanelModel("StudentProgress", studentProgressSchema);

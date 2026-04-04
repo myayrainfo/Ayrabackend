@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const academicApprovalSchema = new mongoose.Schema(
+import getUserPanelModel from "../config/connection.js";
+
+const academicApprovalSchema = new Schema(
   {
     tenantSlug: { type: String, required: true, index: true },
     itemType: { type: String, required: true },
@@ -16,4 +18,4 @@ const academicApprovalSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export default mongoose.model("AcademicApproval", academicApprovalSchema);
+export default getUserPanelModel("AcademicApproval", academicApprovalSchema);

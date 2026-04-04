@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const academicRecordSchema = new mongoose.Schema(
+import getUserPanelModel from "../config/connection.js";
+
+const academicRecordSchema = new Schema(
   {
     tenantSlug: { type: String, required: true, index: true },
     recordType: { type: String, required: true },
@@ -12,4 +14,4 @@ const academicRecordSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export default mongoose.model("AcademicRecord", academicRecordSchema);
+export default getUserPanelModel("AcademicRecord", academicRecordSchema);

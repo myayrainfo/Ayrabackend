@@ -133,6 +133,24 @@ export const updateTenant = async (req, res, next) => {
       throw new NotFoundError('Tenant not found')
     }
 
+    if (updateData.name && updateData.name !== tenant.name) {
+      const existingByName = await Tenant.findOne({ name: updateData.name, _id: { $ne: id } })
+      if (existingByName) {
+        throw new ConflictError('Tenant with this name already exists')
+      }
+    }
+
+    if (updateData.domain && updateData.domain.toLowerCase() !== tenant.domain) {
+      const existingByDomain = await Tenant.findOne({
+        domain: updateData.domain.toLowerCase(),
+        _id: { $ne: id },
+      })
+      if (existingByDomain) {
+        throw new ConflictError('Tenant with this domain already exists')
+      }
+      updateData.domain = updateData.domain.toLowerCase()
+    }
+
     const oldData = tenant.toObject()
 
     Object.keys(updateData).forEach((key) => {

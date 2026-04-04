@@ -95,6 +95,7 @@ export const createAdmin = async (req, res, next) => {
     })
 
     await admin.save()
+    await admin.populate('tenant', 'name')
 
     // Log action
     await AuditLog.create({
@@ -144,6 +145,7 @@ export const updateAdmin = async (req, res, next) => {
     if (status) admin.status = status
 
     await admin.save()
+    await admin.populate('tenant', 'name')
 
     // Log action
     await AuditLog.create({
@@ -207,6 +209,7 @@ export const toggleAdminStatus = async (req, res, next) => {
     const oldStatus = admin.status
     admin.status = admin.status === 'active' ? 'inactive' : 'active'
     await admin.save()
+    await admin.populate('tenant', 'name')
 
     // Log action
     await AuditLog.create({

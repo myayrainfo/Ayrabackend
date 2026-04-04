@@ -2,22 +2,30 @@ import { Router } from "express";
 
 import {
   createAdvisory,
+  createTeacherAlert,
+  createTeacherAttendance,
   createClass,
   createProgress,
   createSubject,
   createTeacherStudent,
   deleteAdvisory,
+  deleteTeacherAlert,
+  deleteTeacherAttendance,
   deleteClass,
   deleteProgress,
   deleteSubject,
   deleteTeacherStudent,
   listAdvisories,
+  listTeacherAlerts,
+  listTeacherAssignments,
+  listTeacherAttendance,
   listClasses,
   listProgress,
   listTeacherLeaveRequests,
   listSubjects,
   listTeacherStudents,
   updateAdvisory,
+  updateTeacherAttendance,
   updateClass,
   updateTeacherLeaveRequest,
   updateProgress,
@@ -26,6 +34,8 @@ import {
 } from "../controllers/teacher.controller.js";
 
 const router = Router({ mergeParams: true });
+
+router.get("/teacher-assignments", listTeacherAssignments);
 
 router.get("/students", listTeacherStudents);
 router.post("/students", createTeacherStudent);
@@ -51,6 +61,15 @@ router.get("/progress", listProgress);
 router.post("/progress", createProgress);
 router.put("/progress/:id", updateProgress);
 router.delete("/progress/:id", deleteProgress);
+
+router.get("/attendance", listTeacherAttendance);
+router.post("/attendance", createTeacherAttendance);
+router.put("/attendance/:id", updateTeacherAttendance);
+router.delete("/attendance/:id", deleteTeacherAttendance);
+
+router.get("/alerts", listTeacherAlerts);
+router.post("/alerts", createTeacherAlert);
+router.delete("/alerts/:id", deleteTeacherAlert);
 
 router.get("/leave-requests", listTeacherLeaveRequests);
 router.put("/leave-requests/:id", updateTeacherLeaveRequest);

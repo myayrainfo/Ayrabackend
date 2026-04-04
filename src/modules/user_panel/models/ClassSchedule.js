@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const classScheduleSchema = new mongoose.Schema(
+import getUserPanelModel from "../config/connection.js";
+
+const classScheduleSchema = new Schema(
   {
     tenantSlug: { type: String, required: true, index: true },
     subjectCode: { type: String, required: true },
@@ -14,4 +16,4 @@ const classScheduleSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export default mongoose.model("ClassSchedule", classScheduleSchema);
+export default getUserPanelModel("ClassSchedule", classScheduleSchema);

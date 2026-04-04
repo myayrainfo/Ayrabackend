@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const announcementSchema = new mongoose.Schema(
+import getUserPanelModel from "../config/connection.js";
+
+const announcementSchema = new Schema(
   {
     tenantSlug: { type: String, required: true, index: true },
     title: { type: String, required: true },
@@ -16,7 +18,7 @@ const announcementSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export default mongoose.model("UserPanelAnnouncement", announcementSchema, "user_panel_announcements");
+export default getUserPanelModel("UserPanelAnnouncement", announcementSchema, "user_panel_announcements");
 
 
 

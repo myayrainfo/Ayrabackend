@@ -6,24 +6,41 @@ export async function login(req, res, next) {
     const { role, username, password } = req.body;
     const tenantSlug = req.params.tenant;
 
-    const user = await User.findOne({
+    let user = await User.findOne({
       tenantSlug,
       role,
       username,
       password,
     });
 
+    let studentProfile = null;
+
+    if (!user && role === "student") {
+      studentProfile = await Student.findOne({
+        tenantSlug,
+        $or: [{ username }, { studentId: username }],
+      }).lean();
+
+      if (studentProfile) {
+        user = await User.findOne({
+          tenantSlug,
+          role,
+          username: studentProfile.username,
+          password,
+        });
+      }
+    }
+
     if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    const studentProfile =
-      user.role === "student"
-        ? await Student.findOne({
-            tenantSlug,
-            username: user.username,
-          }).lean()
-        : null;
+    if (!studentProfile && user.role === "student") {
+      studentProfile = await Student.findOne({
+        tenantSlug,
+        username: user.username,
+      }).lean();
+    }
 
     res.json({
       message: "Login successful",

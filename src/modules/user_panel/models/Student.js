@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const studentSchema = new mongoose.Schema(
+import getUserPanelModel from "../config/connection.js";
+
+const studentSchema = new Schema(
   {
     tenantSlug: { type: String, required: true, index: true },
     studentId: { type: String, required: true, unique: true },
@@ -21,7 +23,7 @@ const studentSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export default mongoose.model("UserPanelStudent", studentSchema, "user_panel_students");
+export default getUserPanelModel("UserPanelStudent", studentSchema, "students");
 
 
 

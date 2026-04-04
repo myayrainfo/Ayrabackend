@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const responseTrackSchema = new mongoose.Schema(
+import getUserPanelModel from "../config/connection.js";
+
+const responseTrackSchema = new Schema(
   {
     tenantSlug: { type: String, required: true, index: true },
     sourceType: { type: String, required: true },
@@ -12,4 +14,4 @@ const responseTrackSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export default mongoose.model("ResponseTrack", responseTrackSchema);
+export default getUserPanelModel("ResponseTrack", responseTrackSchema);

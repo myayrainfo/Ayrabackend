@@ -13,6 +13,8 @@ import masterAuthRoutes from "./modules/master_admin/routes/authRoutes.js";
 import masterCommunicationRoutes from "./modules/master_admin/routes/communicationRoutes.js";
 import masterDashboardRoutes from "./modules/master_admin/routes/dashboardRoutes.js";
 import masterFinanceRoutes from "./modules/master_admin/routes/financeRoutes.js";
+import masterPayrollRoutes from "./modules/master_admin/routes/payrollRoutes.js";
+import masterReminderRoutes from "./modules/master_admin/routes/reminderRoutes.js";
 import masterStudentRoutes from "./modules/master_admin/routes/studentRoutes.js";
 import masterTeacherRoutes from "./modules/master_admin/routes/teacherRoutes.js";
 import masterErrorHandler from "./modules/master_admin/middleware/errorHandler.js";
@@ -27,6 +29,7 @@ import { errorHandler as superErrorHandler } from "./modules/super_admin/middlew
 
 import userAcademicRoutes from "./modules/user_panel/routes/academic.routes.js";
 import userAuthRoutes from "./modules/user_panel/routes/auth.routes.js";
+import userChatbotRoutes from "./modules/user_panel/routes/chatbot.routes.js";
 import userCalendarRoutes from "./modules/user_panel/routes/calendar.routes.js";
 import userCommunicationRoutes from "./modules/user_panel/routes/communication.routes.js";
 import userStudentRoutes from "./modules/user_panel/routes/student.routes.js";
@@ -38,22 +41,50 @@ import {
 
 const app = express();
 
+function expandLocalOriginAliases(origin) {
+  if (!origin) {
+    return [];
+  }
+
+  const trimmedOrigin = origin.trim();
+
+  if (!trimmedOrigin) {
+    return [];
+  }
+
+  return Array.from(
+    new Set([
+      trimmedOrigin,
+      trimmedOrigin.replace("://localhost", "://127.0.0.1"),
+      trimmedOrigin.replace("://127.0.0.1", "://localhost"),
+    ]),
+  );
+}
+
 const allowedOrigins = Array.from(
   new Set(
     [
       process.env.FRONTEND_URL,
       process.env.CORS_ORIGIN,
       "http://localhost:5173",
+      "http://127.0.0.1:5173",
       "http://localhost:5174",
+      "http://127.0.0.1:5174",
+      "http://localhost:5175",
+      "http://127.0.0.1:5175",
+      "http://localhost:5176",
+      "http://127.0.0.1:5176",
+      "http://localhost:5177",
+      "http://127.0.0.1:5177",
       "http://localhost:3000",
+      "http://127.0.0.1:3000",
       "https://superadmin.myayra.in",
       "https://user.myayra.in",
       "https://master.myayra.in",
       "https://myayra.in",
     ]
       .flatMap((value) => (value ? value.split(",") : []))
-      .map((origin) => origin.trim())
-      .filter(Boolean),
+      .flatMap(expandLocalOriginAliases),
   ),
 );
 
@@ -107,6 +138,8 @@ masterRouter.use("/students", masterStudentRoutes);
 masterRouter.use("/teachers", masterTeacherRoutes);
 masterRouter.use("/academics", masterAcademicsRoutes);
 masterRouter.use("/finance", masterFinanceRoutes);
+masterRouter.use("/payroll", masterPayrollRoutes);
+masterRouter.use("/reminders", masterReminderRoutes);
 masterRouter.use("/communication", masterCommunicationRoutes);
 masterRouter.use("/dashboard", masterDashboardRoutes);
 masterRouter.use("/admins", masterAdminRoutes);
@@ -131,6 +164,7 @@ userRouter.get("/health", (_req, res) => {
   res.json({ ok: true, service: "user_panel" });
 });
 userRouter.use("/:tenant/auth", authLimiter, userAuthRoutes);
+userRouter.use("/:tenant/chatbot", userChatbotRoutes);
 userRouter.use("/:tenant/students", userStudentRoutes);
 userRouter.use("/:tenant/teacher", userTeacherRoutes);
 userRouter.use("/:tenant/academic", userAcademicRoutes);

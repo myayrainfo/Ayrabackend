@@ -9,7 +9,7 @@ const feeSchema = new mongoose.Schema(
     },
     student: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'MasterStudent',
+      ref: 'Student',
       required: true,
     },
 
@@ -70,6 +70,3 @@ feeSchema.index({ academicYear: 1 });
 
 const Fee = mongoose.model('Fee', feeSchema);
 export default Fee;
-
-
-

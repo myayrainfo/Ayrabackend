@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const campaignSchema = new mongoose.Schema(
+import getUserPanelModel from "../config/connection.js";
+
+const campaignSchema = new Schema(
   {
     tenantSlug: { type: String, required: true, index: true },
     title: { type: String, required: true },
@@ -16,4 +18,4 @@ const campaignSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export default mongoose.model("Campaign", campaignSchema);
+export default getUserPanelModel("Campaign", campaignSchema);

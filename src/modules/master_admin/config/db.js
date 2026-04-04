@@ -4,9 +4,9 @@ import logger from '../utils/logger.js';
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(
-      process.env.MASTER_MONGO_URI || process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb://localhost:27017/AYRAERP',
+      process.env.MASTER_MONGO_URI || process.env.MONGO_URI || process.env.MONGODB_URI,
       {
-        serverSelectionTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 5000,
       },
     );
 
@@ -19,6 +19,7 @@ const connectDB = async () => {
     mongoose.connection.on('reconnected', () => {
       logger.info('MongoDB reconnected.');
     });
+
   } catch (error) {
     logger.error(`MongoDB connection error: ${error.message}`);
     process.exit(1);

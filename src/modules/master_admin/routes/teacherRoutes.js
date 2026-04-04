@@ -16,7 +16,7 @@ const teacherValidation = [
   body('email').isEmail().withMessage('Valid email is required'),
   body('department').notEmpty().withMessage('Department is required'),
   body('designation')
-    .isIn(['Professor', 'Associate Professor', 'Assistant Professor', 'Head of Department', 'Dean', 'Lecturer', 'Visiting Faculty'])
+    .isIn(['Professor', 'Associate Professor', 'Assistant Professor', 'Lecturer', 'Visiting Faculty'])
     .withMessage('Invalid designation'),
 ];
 

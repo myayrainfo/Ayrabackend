@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const teacherSubjectSchema = new mongoose.Schema(
+import getUserPanelModel from "../config/connection.js";
+
+const teacherSubjectSchema = new Schema(
   {
     tenantSlug: { type: String, required: true, index: true },
     subjectCode: { type: String, required: true, unique: true },
@@ -13,4 +15,4 @@ const teacherSubjectSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export default mongoose.model("TeacherSubject", teacherSubjectSchema);
+export default getUserPanelModel("TeacherSubject", teacherSubjectSchema);

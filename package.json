@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
+    "sync:master-atlas": "node src/modules/master_admin/scripts/syncAtlasMasterAdmin.js",
     "dev:landing": "npm --prefix ./apps/landing_panel run dev",
     "dev:master": "npm --prefix ./apps/master_admin run dev",
     "dev:super": "npm --prefix ./apps/super_admin run dev",
@@ -23,6 +24,7 @@
     "mongoose": "^8.18.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
+    "nodemailer": "^8.0.4",
     "winston": "^3.11.0"
   },
   "devDependencies": {

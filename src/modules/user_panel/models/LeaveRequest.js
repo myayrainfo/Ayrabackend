@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const leaveRequestSchema = new mongoose.Schema(
+import getUserPanelModel from "../config/connection.js";
+
+const leaveRequestSchema = new Schema(
   {
     tenantSlug: { type: String, required: true, index: true },
     studentName: { type: String, required: true },
@@ -18,4 +20,4 @@ const leaveRequestSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export default mongoose.model("LeaveRequest", leaveRequestSchema);
+export default getUserPanelModel("LeaveRequest", leaveRequestSchema);

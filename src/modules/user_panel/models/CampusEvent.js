@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const campusEventSchema = new mongoose.Schema(
+import getUserPanelModel from "../config/connection.js";
+
+const campusEventSchema = new Schema(
   {
     tenantSlug: { type: String, required: true, index: true },
     year: {
@@ -18,4 +20,4 @@ const campusEventSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export default mongoose.model("CampusEvent", campusEventSchema);
+export default getUserPanelModel("CampusEvent", campusEventSchema);

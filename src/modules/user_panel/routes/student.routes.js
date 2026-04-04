@@ -5,8 +5,12 @@ import {
   createLeaveRequest,
   deleteStudent,
   deleteLeaveRequest,
+  listStudentAlerts,
+  listStudentAttendance,
+  listStudentProgress,
   listLeaveRequests,
   listStudents,
+  listSupportContacts,
   updateLeaveRequest,
   updateStudent,
 } from "../controllers/student.controller.js";
@@ -17,6 +21,11 @@ router.get("/", listStudents);
 router.post("/", createStudent);
 router.put("/:id", updateStudent);
 router.delete("/:id", deleteStudent);
+
+router.get("/progress", listStudentProgress);
+router.get("/attendance", listStudentAttendance);
+router.get("/alerts", listStudentAlerts);
+router.get("/support-contacts", listSupportContacts);
 
 router.get("/leave-requests", listLeaveRequests);
 router.post("/leave-requests", createLeaveRequest);

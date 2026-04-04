@@ -1,13 +1,17 @@
 import Advisory from "../models/Advisory.js";
+import AttendanceRecord from "../models/AttendanceRecord.js";
 import ClassSchedule from "../models/ClassSchedule.js";
 import LeaveRequest from "../models/LeaveRequest.js";
 import Student from "../models/Student.js";
 import StudentProgress from "../models/StudentProgress.js";
+import TeacherAlert from "../models/TeacherAlert.js";
+import TeacherAssignment from "../models/TeacherAssignment.js";
 import TeacherSubject from "../models/TeacherSubject.js";
 import User from "../models/User.js";
 import { createDocument, deleteDocument, listDocuments, updateDocument } from "../utils/crudHandlers.js";
 
 export const listTeacherStudents = listDocuments(Student);
+export const listTeacherAssignments = listDocuments(TeacherAssignment);
 
 export async function createTeacherStudent(req, res, next) {
   try {
@@ -145,6 +149,15 @@ export const listProgress = listDocuments(StudentProgress);
 export const createProgress = createDocument(StudentProgress);
 export const updateProgress = updateDocument(StudentProgress);
 export const deleteProgress = deleteDocument(StudentProgress);
+
+export const listTeacherAttendance = listDocuments(AttendanceRecord);
+export const createTeacherAttendance = createDocument(AttendanceRecord);
+export const updateTeacherAttendance = updateDocument(AttendanceRecord);
+export const deleteTeacherAttendance = deleteDocument(AttendanceRecord);
+
+export const listTeacherAlerts = listDocuments(TeacherAlert);
+export const createTeacherAlert = createDocument(TeacherAlert);
+export const deleteTeacherAlert = deleteDocument(TeacherAlert);
 
 export const listTeacherLeaveRequests = listDocuments(LeaveRequest);
 export async function updateTeacherLeaveRequest(req, res, next) {
