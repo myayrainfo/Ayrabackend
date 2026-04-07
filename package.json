@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
-    "sync:master-atlas": "node src/modules/master_admin/scripts/syncAtlasMasterAdmin.js",
+    "seed": "node src/scripts/seed.js",
+    "sync": "node src/scripts/sync.js",
+    "sync:master-atlas": "node src/scripts/sync.js",
     "dev:landing": "npm --prefix ./apps/landing_panel run dev",
     "dev:master": "npm --prefix ./apps/master_admin run dev",
     "dev:super": "npm --prefix ./apps/super_admin run dev",
