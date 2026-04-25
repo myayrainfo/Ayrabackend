@@ -1,0 +1,36 @@
+export function getTimetableSeedData(tenantId = "cgu") {
+  return [
+    {
+      _id: "class-1",
+      tenantId,
+      subjectCode: "CS601",
+      subjectName: "Operating Systems",
+      className: "OS Theory",
+      kind: "Theory",
+      department: "CSE",
+      semester: 6,
+      section: "A",
+      day: "Monday",
+      startTime: "09:30",
+      endTime: "10:30",
+      facultyName: "Prof. A. Sharma",
+      room: "B-204",
+    },
+    {
+      _id: "class-2",
+      tenantId,
+      subjectCode: "CS602",
+      subjectName: "Computer Networks",
+      className: "CN Theory",
+      kind: "Theory",
+      department: "CSE",
+      semester: 6,
+      section: "A",
+      day: "Tuesday",
+      startTime: "11:00",
+      endTime: "12:00",
+      facultyName: "Prof. A. Sharma",
+      room: "B-210",
+    },
+  ];
+}

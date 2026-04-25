@@ -1,0 +1,41 @@
+export function getTeacherSeedData(tenantId = "cgu") {
+  return [
+    {
+      _id: "teacher-1",
+      tenantId,
+      username: "teacher1",
+      employeeId: "CGU-TE-009",
+      fullName: "Prof. A. Sharma",
+      displayName: "Prof. A. Sharma",
+      department: "CSE",
+      designation: "Associate Professor",
+      email: "asharma@cgu.edu.in",
+      phone: "9000000001",
+      status: "accept",
+    },
+    {
+      _id: "teach-assignment-1",
+      tenantId,
+      username: "teacher1",
+      teacherName: "Prof. A. Sharma",
+      department: "CSE",
+      semester: 6,
+      section: "A",
+      subjectCode: "CS601",
+      subjectName: "Operating Systems",
+      assignmentOnly: true,
+    },
+    {
+      _id: "teach-assignment-2",
+      tenantId,
+      username: "teacher1",
+      teacherName: "Prof. A. Sharma",
+      department: "CSE",
+      semester: 6,
+      section: "A",
+      subjectCode: "CS602",
+      subjectName: "Computer Networks",
+      assignmentOnly: true,
+    },
+  ];
+}

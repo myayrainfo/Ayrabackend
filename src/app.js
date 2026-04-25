@@ -4,18 +4,18 @@ import helmet from "helmet";
 import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 
-import env from "./config/env.js";
 import corsOptions from "./config/cors.js";
+import env from "./config/env.js";
+import errorHandler from "./core/middleware/errorHandler.js";
+import notFound from "./core/middleware/notFound.js";
 import createApiRoutes from "./routes/index.js";
-import errorMiddleware from "./common/middleware/error.middleware.js";
-import notFoundMiddleware from "./common/middleware/not-found.middleware.js";
 
 const app = express();
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 10,
-  message: { success: false, message: "Too many login attempts. Please try again later." },
+  message: { ok: false, message: "Too many requests. Please try again later." },
 });
 
 app.disable("x-powered-by");
@@ -24,10 +24,18 @@ app.use(cors(corsOptions));
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(morgan(env.isProduction ? "combined" : "dev"));
-app.use("/api", createApiRoutes({ authLimiter }));
-app.use(notFoundMiddleware);
-app.use(errorMiddleware);
+
+app.get("/", (_req, res) => {
+  res.json({
+    ok: true,
+    service: "ayra-education-api",
+    docs: "/api/health",
+  });
+});
+
+app.use("/api/auth", authLimiter);
+app.use("/api", createApiRoutes());
+app.use(notFound);
+app.use(errorHandler);
 
 export default app;
-
-

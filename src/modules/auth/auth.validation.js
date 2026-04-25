@@ -1,13 +1,15 @@
 import { body } from "express-validator";
 
 export const loginValidation = [
-  body("username").optional().isString(),
-  body("email").optional().isEmail(),
-  body("password").notEmpty().withMessage("Password is required"),
+  body("username").trim().notEmpty(),
+  body("password").isString().notEmpty(),
+  body("role").optional().isString(),
 ];
 
-export default {
-  loginValidation,
-};
+export const adminLoginValidation = [
+  body("username").trim().notEmpty(),
+  body("password").isString().notEmpty(),
+  body("portal").optional().isString(),
+];
 
-
+export const refreshValidation = [body("refreshToken").isString().notEmpty()];

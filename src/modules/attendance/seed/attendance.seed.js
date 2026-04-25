@@ -1,0 +1,40 @@
+export function getAttendanceSeedData(tenantId = "cgu") {
+  return [
+    {
+      _id: "attendance-1",
+      tenantId,
+      studentId: "CGU2024CSE001",
+      studentName: "Rahul Nayak",
+      department: "CSE",
+      semester: 6,
+      section: "A",
+      date: "2026-04-20",
+      status: "present",
+      monthLabel: "Apr 2026",
+    },
+    {
+      _id: "attendance-2",
+      tenantId,
+      studentId: "CGU2024CSE001",
+      studentName: "Rahul Nayak",
+      department: "CSE",
+      semester: 6,
+      section: "A",
+      date: "2026-04-21",
+      status: "present",
+      monthLabel: "Apr 2026",
+    },
+    {
+      _id: "attendance-3",
+      tenantId,
+      studentId: "CGU2024CSE001",
+      studentName: "Rahul Nayak",
+      department: "CSE",
+      semester: 6,
+      section: "A",
+      date: "2026-04-22",
+      status: "absent",
+      monthLabel: "Apr 2026",
+    },
+  ];
+}

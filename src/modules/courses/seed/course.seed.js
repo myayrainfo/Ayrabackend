@@ -1,0 +1,40 @@
+export function getCourseSeedData(tenantId = "cgu") {
+  return [
+    {
+      _id: "subject-1",
+      tenantId,
+      code: "CS601",
+      name: "Operating Systems",
+      kind: "Theory",
+      department: "CSE",
+      semester: 6,
+      credits: 4,
+      facultyName: "Prof. A. Sharma",
+      attendancePercentage: 91,
+    },
+    {
+      _id: "subject-2",
+      tenantId,
+      code: "CS602",
+      name: "Computer Networks",
+      kind: "Theory",
+      department: "CSE",
+      semester: 6,
+      credits: 3,
+      facultyName: "Prof. A. Sharma",
+      attendancePercentage: 94,
+    },
+    {
+      _id: "subject-3",
+      tenantId,
+      code: "CS603",
+      name: "Machine Learning Lab",
+      kind: "Lab",
+      department: "CSE",
+      semester: 6,
+      credits: 2,
+      facultyName: "Prof. S. Panda",
+      attendancePercentage: 96,
+    },
+  ];
+}

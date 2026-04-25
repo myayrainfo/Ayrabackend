@@ -1,0 +1,43 @@
+export function getAdminSeedData(tenantId = "cgu") {
+  return [
+    {
+      _id: "admin-1",
+      tenantId,
+      name: "AYRA Super Admin",
+      username: "superadmin",
+      email: "superadmin@erp-system.com",
+      role: "ADMIN",
+      phone: "9000000000",
+      department: "Administration",
+      portal: "masterAdmin",
+      isActive: true,
+      createdAt: "2026-04-01T09:00:00.000Z",
+    },
+    {
+      _id: "admin-2",
+      tenantId,
+      name: "Academic Controller",
+      username: "academics",
+      email: "academics@cgu.edu.in",
+      role: "ACADEMICS",
+      phone: "9000000001",
+      department: "Academics",
+      portal: "academics",
+      isActive: true,
+      createdAt: "2026-04-03T10:00:00.000Z",
+    },
+    {
+      _id: "admin-3",
+      tenantId,
+      name: "Finance Desk",
+      username: "accounts",
+      email: "accounts@cgu.edu.in",
+      role: "FINANCE",
+      phone: "9000000002",
+      department: "Accounts",
+      portal: "accounts",
+      isActive: true,
+      createdAt: "2026-04-05T11:00:00.000Z",
+    },
+  ];
+}

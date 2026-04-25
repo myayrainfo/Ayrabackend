@@ -1,24 +1,25 @@
-import winston from "winston";
+const LEVELS = {
+  info: "INFO",
+  warn: "WARN",
+  error: "ERROR",
+};
 
-const { combine, timestamp, colorize, errors, printf, json } = winston.format;
+function write(level, message, meta) {
+  const ts = new Date().toISOString();
+  const suffix = meta ? ` ${JSON.stringify(meta)}` : "";
+  console.log(`[${ts}] ${LEVELS[level]} ${message}${suffix}`);
+}
 
-const consoleFormat = printf(({ level, message, timestamp: ts, stack }) => {
-  return `${ts} ${level}: ${stack || message}`;
-});
-
-const logger = winston.createLogger({
-  level: process.env.LOG_LEVEL || "info",
-  defaultMeta: { service: "ayra-erp-backend" },
-  transports: [
-    new winston.transports.Console({
-      format:
-        process.env.NODE_ENV === "production"
-          ? combine(timestamp(), errors({ stack: true }), json())
-          : combine(colorize(), timestamp(), errors({ stack: true }), consoleFormat),
-    }),
-  ],
-});
+const logger = {
+  info(message, meta) {
+    write("info", message, meta);
+  },
+  warn(message, meta) {
+    write("warn", message, meta);
+  },
+  error(message, meta) {
+    write("error", message, meta);
+  },
+};
 
 export default logger;
-
-

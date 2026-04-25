@@ -1,19 +1,22 @@
-import { Router } from "express";
+import express from "express";
 
-import { getAuthOverview } from "./auth.controller.js";
-import landingAuthRoutes from "./landing/auth.routes.js";
-import masterAuthRoutes from "./master/auth.routes.js";
-import superAuthRoutes from "./super/auth.routes.js";
-import userAuthRoutes from "./user/auth.routes.js";
+import requireAuth from "../../core/middleware/requireAuth.js";
+import tenantMiddleware from "../../core/tenant/tenantMiddleware.js";
+import asyncHandler from "../../core/utils/asyncHandler.js";
+import { validateRequest } from "../../core/utils/validation.js";
+import authController from "./auth.controller.js";
+import { adminLoginValidation, loginValidation, refreshValidation } from "./auth.validation.js";
 
-const router = Router();
+const router = express.Router();
 
-router.get("/", getAuthOverview);
-router.use("/landing", landingAuthRoutes);
-router.use("/master", masterAuthRoutes);
-router.use("/super", superAuthRoutes);
-router.use("/user/:tenant", userAuthRoutes);
+router.post("/login", tenantMiddleware, loginValidation, validateRequest, asyncHandler(authController.login));
+router.get("/me", requireAuth, tenantMiddleware, asyncHandler(authController.me));
+router.post("/logout", requireAuth, tenantMiddleware, asyncHandler(authController.logout));
+router.post("/refresh", refreshValidation, validateRequest, asyncHandler(authController.refresh));
+
+router.get("/master/portal-settings", asyncHandler(authController.portalSettings));
+router.post("/master/login", adminLoginValidation, validateRequest, asyncHandler(authController.loginAdmin));
+router.post("/master/refresh", refreshValidation, validateRequest, asyncHandler(authController.refresh));
+router.post("/master/logout", asyncHandler(authController.logout));
 
 export default router;
-
-
